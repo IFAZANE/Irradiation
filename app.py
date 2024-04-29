@@ -43,7 +43,7 @@ def predict_irradiation_polynomial(df, num_days):
 def predict_irradiation_autoarima(df, num_days):
     model = auto_arima(df['Irradiation'], seasonal=False, trace=True)
     predictions = model.predict(n_periods=num_days)
-    future_dates = pd.date_range(start=df['Date'].iloc[-1], periods=num_days, freq='D')
+    future_dates = pd.date_range(start=df['Date'].iloc[-1], periods=num_days, freq='H')
 
     future_df = pd.DataFrame({'Date': future_dates, 'Irradiation': predictions})
     return future_df
